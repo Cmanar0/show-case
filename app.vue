@@ -1,8 +1,9 @@
 <template>
   <div>
+    <HelloWorld />
     <TestComponent />
   </div>
 </template>
 <script setup>
-import TestComponent from '@/components/TestComponent.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
 </script>

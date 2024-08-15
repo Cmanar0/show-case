@@ -10,10 +10,18 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@pinia/nuxt',                // Pinia for state management
-    '@nuxtjs/tailwindcss',        // Tailwind CSS integration
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@nuxt/test-utils/module',
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', config => {
+        config.plugins = config.plugins || []
+      })
+    }
   ],
-
+    vite: {
+    envPrefix: 'NUXT_PUBLIC_'
+  },
   // Ensure your Tailwind CSS file is listed here
   css: ['~/assets/css/main.css'],
 
