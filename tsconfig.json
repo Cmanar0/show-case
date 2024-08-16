@@ -3,5 +3,15 @@
   "extends": "./.nuxt/tsconfig.json",
     "compilerOptions": {
     "types": ["vitest/globals"]
-  }
+  },
+    "include": [
+    "types/**/*.d.ts",  // Include your custom types
+    "components/**/*.ts",
+    "layouts/**/*.ts",
+    "middleware/**/*.ts",
+    "pages/**/*.ts",
+    "plugins/**/*.ts",
+    "store/**/*.ts"
+  ]
 }
+

@@ -11,7 +11,11 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.5.3",
+    "axios": "^1.7.4",
+    "js-cookie": "^3.0.5",
+    "mitt": "^3.0.1",
     "nuxt": "^3.12.4",
     "pinia": "^2.2.1",
     "vue": "latest"
@@ -19,11 +23,14 @@
   "devDependencies": {
     "@nuxt/test-utils": "^3.14.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@types/js-cookie": "^3.0.6",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.20",
     "happy-dom": "^14.12.3",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
-    "vitest": "^2.0.5"
+    "vite-plugin-vuetify": "^2.0.3",
+    "vitest": "^2.0.5",
+    "vuetify": "^3.6.8"
   }
 }

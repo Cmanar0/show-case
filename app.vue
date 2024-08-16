@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <HelloWorld />
-    <TestComponent />
-  </div>
+  <NuxtLayout>
+    <v-app>
+      <NuxtPage />
+    </v-app>
+  </NuxtLayout>
 </template>
-<script setup>
-import HelloWorld from '@/components/HelloWorld.vue';
-</script>

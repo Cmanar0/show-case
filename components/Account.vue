@@ -1,0 +1,175 @@
+<template>
+  <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md">
+    <div class="mt-6 bg-white p-4 rounded-md">
+      <h3 class="text-xl font-semibold mb-4">Personal Information</h3>
+      <form @submit.prevent="updateAccount">
+        <div class="mb-4">
+          <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+          <div v-if="!isEditing" class="mt-1">
+            <span>{{ form.firstName || 'N/A' }}</span>
+          </div>
+          <div v-else class="mt-1">
+            <input 
+              type="text" 
+              v-model="form.firstName" 
+              class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
+            />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+          <div v-if="!isEditing" class="mt-1">
+            <span>{{ form.lastName || 'N/A' }}</span>
+          </div>
+          <div v-else class="mt-1">
+            <input 
+              type="text" 
+              v-model="form.lastName" 
+              class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
+            />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <div v-if="!isEditing" class="mt-1">
+            <span>{{ form.email || 'N/A' }}</span>
+          </div>
+          <div v-else class="mt-1">
+            <input 
+              type="email" 
+              v-model="form.email" 
+              class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
+            />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <div v-if="!isEditing" class="mt-1">
+            <span>••••••••</span>
+          </div>
+          <div v-else class="mt-1">
+            <input 
+              type="password" 
+              v-model="form.password" 
+              class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
+            />
+          </div>
+        </div>
+        <div class="flex justify-end gap-3 mt-6">
+          <button
+            v-if="isEditing"
+            type="submit"
+            :disabled="!hasChanges"
+            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Update All
+          </button>
+          <button
+            type="button"
+            @click="toggleEditing"
+            class="px-4 py-2 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700"
+          >
+            {{ isEditing ? 'Close' : 'Edit' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import Cookies from 'js-cookie'
+import apiService from '../services/api-request' // Update the path as necessary
+
+const user = ref(null)
+
+onMounted(() => {
+  const storedUser = localStorage.getItem('bv_user')
+  if (storedUser) {
+    user.value = JSON.parse(storedUser)
+    console.log('user :>> ', user.value.id)
+  }
+})
+
+const form = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: ''
+})
+
+const originalForm = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: ''
+})
+
+const isEditing = ref(false)
+
+const fetchAccountData = async () => {
+  try {
+    console.log('Fetching user data for ID:', user.value.id)
+    const response = await apiService.get(`/api/users/${user.value.id}`)
+    console.log('response USER :>> ', response)
+    const userData = response.data.data
+    form.value = {
+      firstName: userData.firstName || '',
+      lastName: userData.lastName || '',
+      email: userData.email || '',
+      password: '' // Do not fetch or display the password
+    }
+    originalForm.value = { ...form.value }
+  } catch (error) {
+    console.error('Failed to fetch account data:', error)
+  }
+}
+
+const updateAccount = async () => {
+  try {
+    const data = {
+      firstName: form.value.firstName,
+      lastName: form.value.lastName,
+      email: form.value.email
+    }
+    if (form.value.password) {
+      data['password'] = form.value.password
+    }
+    console.log('Updating user data with:', data)
+    await apiService.patch(`/api/users/${user.value.id}`, data)
+    // Update local storage
+    const updatedUser = { ...user.value, ...data }
+    localStorage.setItem('bv_user', JSON.stringify(updatedUser))
+    user.value = updatedUser
+    originalForm.value = { ...form.value }
+    isEditing.value = false
+    window.location.reload()
+  } catch (error) {
+    console.error('Failed to update account:', error)
+  }
+}
+
+const toggleEditing = () => {
+  isEditing.value = !isEditing.value
+  if (!isEditing.value) {
+    form.value = { ...originalForm.value }
+  }
+}
+
+const hasChanges = ref(false)
+watch(
+  form,
+  newVal => {
+    hasChanges.value = JSON.stringify(newVal) !== JSON.stringify(originalForm.value)
+  },
+  { deep: true }
+)
+
+onMounted(() => {
+  fetchAccountData()
+})
+</script>
+
+<style scoped>
+</style>
