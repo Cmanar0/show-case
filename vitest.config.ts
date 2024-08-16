@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '~': path.resolve(__dirname, './'),  // Ensure this is pointing to your root directory
+      '@': path.resolve(__dirname, './'),  // Add this alias for easier imports
     },
   },
   test: {

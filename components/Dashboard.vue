@@ -50,7 +50,7 @@ import PhoneInput from './PhoneInput.vue'
 import MeetingInfo from './MeetingInfo.vue'
 import ErrorMessage from './ErrorMessage.vue'
 import { addError } from '../stores/errorsStore' // Import addError function
-import { addNotification } from '../../stores/notificationStore' // Import addNotification function
+import { addNotification } from '../stores/notificationStore' // Import addNotification function
 import mittBus from '../utils/mitt.js' // Import mittBus for loader
 
 const currentStep = ref('input')
