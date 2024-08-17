@@ -35,40 +35,29 @@
     </form>
   </div>
 </template>
-
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const emit = defineEmits(['phoneSubmitted'])
+const emit = defineEmits<{ (e: 'phoneSubmitted', phoneNumber: string): void }>()
 
-const phoneNumber = ref('')
-const error = ref('')
+const phoneNumber = ref<string>('')
+const error = ref<string>('')
 
-// Function to validate phone number format
-const validatePhoneNumber = (number) => {
-  const phoneRegex = /^\d{9}$/  // Allow exactly 9 digits in the format 123456789
+const validatePhoneNumber = (number: string): boolean => {
+  const phoneRegex = /^\d{9}$/  
   return phoneRegex.test(number)
 }
 
-// Function to handle phone number submission
-const submitPhoneNumber = () => {
+const submitPhoneNumber = (): void => {
   if (validatePhoneNumber(phoneNumber.value)) {
     error.value = ''
-    emit('phoneSubmitted', phoneNumber.value)  // Emit the phoneSubmitted event with the phone number
+    emit('phoneSubmitted', phoneNumber.value)
   } else {
     error.value = 'Please enter a valid 9-digit phone number in the format 123456789'
   }
 }
 
-// Function to clear the phone number input
-const clearPhoneNumber = () => {
+const clearPhoneNumber = (): void => {
   phoneNumber.value = ''
 }
 </script>
-
-<style scoped>
-/* Increase spacing between the digits */
-input {
-  letter-spacing: 0.2em;
-}
-</style>

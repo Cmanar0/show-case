@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import PhoneInput from './PhoneInput.vue'
 import MeetingInfo from './MeetingInfo.vue'
@@ -52,26 +52,25 @@ import ErrorMessage from './ErrorMessage.vue'
 import { addError } from '../stores/errorsStore' // Import addError function
 import { addNotification } from '../stores/notificationStore' // Import addNotification function
 import mittBus from '../utils/mitt.js' // Import mittBus for loader
+import type { Meeting } from '../types/meeting'
+import type { Error } from '../types/errors'
 
-const currentStep = ref('input')
-const meeting = ref(null)
+const currentStep = ref<'input' | 'info' | 'error'>('input')
+const meeting = ref<Meeting | null>(null)
 const isLoading = ref(false)
 
-const fetchMeetingInfo = async (phoneNumber) => {
+const fetchMeetingInfo = async (phoneNumber: string): Promise<void> => {
   try {
-    // Emit loader-on event to show loader
     mittBus.emit('loader-on')
     isLoading.value = true
 
-    // Delay for 500 milliseconds before making the request
     await new Promise((resolve) => setTimeout(resolve, 500))
 
-    const response = await $fetch(`/api/meeting?phone=${phoneNumber}`)
+    const response = await $fetch<{ meeting: Meeting }>(`/api/meeting?phone=${phoneNumber}`)
     if (response && response.meeting) {
       meeting.value = response.meeting
       currentStep.value = 'info'
 
-      // Add notification upon successfully finding meeting information
       addNotification({
         title: 'Meeting Found',
         message: `Your meeting is scheduled with ${response.meeting.person} at ${response.meeting.time} in ${response.meeting.location}. Please wait to be picked up.`,
@@ -81,18 +80,16 @@ const fetchMeetingInfo = async (phoneNumber) => {
       handleError(response.status, response.error)
       currentStep.value = 'error'
     }
-  } catch (error) {
+  } catch (error: any) {
     handleError(error.response?.status, error.message)
     currentStep.value = 'error'
   } finally {
-    // Emit loader-off event to hide loader
     mittBus.emit('loader-off')
     isLoading.value = false
   }
 }
 
-// Function to handle errors using addError
-const handleError = (status, message) => {
+const handleError = (status: number, message: string): void => {
   let header = 'Error'
   let content = message || 'An unknown error occurred. Please try again.'
 
@@ -124,15 +121,7 @@ const handleError = (status, message) => {
   })
 }
 
-// Functions to simulate different error scenarios
-const simulateError = (errorType) => {
+const simulateError = (errorType: string): void => {
   fetchMeetingInfo(errorType)
 }
 </script>
-
-<style scoped>
-/* Increase spacing between the digits */
-input {
-  letter-spacing: 0.2em;
-}
-</style>
