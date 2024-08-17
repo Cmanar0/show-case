@@ -5,7 +5,7 @@
         
         <!-- Row of Tailwind buttons to simulate different errors -->
         <div class="flex justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
-          <h2 class="text-2xl flex  align-center font-bold text-gray-800">Simulate Error Responces:</h2>
+          <h2 class="text-2xl flex  align-center font-bold text-gray-800">Simulate Responces:</h2>
           <span class="flex gap-2">
             <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400" data-test="error-404">
               Simulate 404 Not Found
@@ -77,7 +77,7 @@ const response = await $fetch<{ meeting: Meeting, status: number, error: string 
       addNotification({
         title: 'Meeting Found',
         message: `Your meeting is scheduled with ${response.meeting.person} at ${response.meeting.time} in ${response.meeting.location}. Please wait to be picked up.`,
-        color: 'green'
+        background: '#87efaa'
       })
     } else {
       handleError(response.status, response.error)

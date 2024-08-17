@@ -36,9 +36,9 @@
       <IconLabelBtn
         type="submit" 
         label="Submit"
-        iconName="sample-icon"
+        iconName="search"
         iconColor="#ffffff"
-        iconSize="12px"
+        iconSize="20px"
         textSize="16px"
         textColor="#ffffff"
         :bold="true"
