@@ -260,6 +260,7 @@ main {
   width: 100%;
   padding: 15px;
   transition: width 0.5s;
+  z-index: 100;
 }
 .menu a {
   display: flex;
