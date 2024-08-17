@@ -1,27 +1,26 @@
 <template>
   <div class="min-h-screen flex bg-gray-100 p-8" data-test="dashboard">
     <div class="min-w-full">
-      <div>
-        
-        <!-- Row of Tailwind buttons to simulate different errors -->
-        <div class="flex bg-white p-6 rounded-lg shadow-md  justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
-          <h2 class="text-2xl flex font-bold text-gray-800">Simulate Responces:</h2>
-          <span class="flex gap-2">
-            <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400" data-test="error-404">
-              Simulate 404 Not Found
-            </button>
-            <button @click="simulateError('error500')" class="bg-yellow-200 text-white px-4 py-2 rounded hover:bg-yellow-400" data-test="error-500">
-              Simulate 500 Server Error
-            </button>
-            <button @click="simulateError('error403')" class="bg-blue-300 text-white px-4 py-2 rounded hover:bg-blue-400" data-test="error-403">
-              Simulate 403 Forbidden
-            </button>
-            <button @click="simulateError('error400')" class="bg-green-300 text-white px-4 py-2 rounded hover:bg-green-400" data-test="error-400">
-              Simulate 400 Bad Request
-            </button>
-          </span>
-        </div>
+
+      <!-- Row of Tailwind buttons to simulate different errors -->
+      <div class="flex bg-white p-6 rounded-lg shadow-md  justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
+        <h2 class="text-2xl flex font-bold text-gray-800">Simulate Responces:</h2>
+        <span class="flex gap-2">
+          <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400" data-test="error-404">
+            Simulate 404 Not Found
+          </button>
+          <button @click="simulateError('error500')" class="bg-yellow-200 text-white px-4 py-2 rounded hover:bg-yellow-400" data-test="error-500">
+            Simulate 500 Server Error
+          </button>
+          <button @click="simulateError('error403')" class="bg-blue-300 text-white px-4 py-2 rounded hover:bg-blue-400" data-test="error-403">
+            Simulate 403 Forbidden
+          </button>
+          <button @click="simulateError('error400')" class="bg-green-300 text-white px-4 py-2 rounded hover:bg-green-400" data-test="error-400">
+            Simulate 400 Bad Request
+          </button>
+        </span>
       </div>
+
       <!-- Flex column on medium screens and smaller -->
       <div class="flex flex-col md:flex-row gap-4">
         <!-- First Card with min-width of 300px -->
@@ -41,10 +40,10 @@
             <ErrorMessage v-if="currentStep === 'error'" data-test="error-message" />
           </div>
         </div>
-
       </div>
+
       <!-- Third Card with min-width of 300px -->
-        <IconLabelBtnPlayground data-test="icon-label-btn-playground" />
+      <IconLabelBtnPlayground data-test="icon-label-btn-playground" />
     </div>
   </div>
 </template>
