@@ -2,7 +2,11 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
     "compilerOptions": {
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "vite/client"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"], 
   },
     "include": [
     "types/**/*.d.ts",  // Include your custom types

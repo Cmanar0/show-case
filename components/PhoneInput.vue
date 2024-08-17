@@ -31,15 +31,34 @@
 
         <span v-if="error" class="text-red-500 text-sm" data-test="error-message">{{ error }}</span>
       </div>
-      <button type="submit" class="w-full p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition" data-test="submit-button">
-        Submit
-      </button>
+
+      <IconLabelBtn
+        type="submit" 
+        label="Submit"
+        iconColor="#ffffff"
+        iconSize="12px"
+        textSize="16px"
+        textColor="#ffffff"
+        :bold="true"
+        iconPosition="right"
+        color="#2563EB" 
+        :fullWidth="true"
+        position="middle"
+        :spaceBetween="false"
+        :disabled="false"
+        paddingX="20px"
+        paddingY="10px"
+        borderRadius="4px"  
+        data-test="submit-button"
+      />
+
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import IconLabelBtn from './reusable/IconLabelBtn.vue';
 
 const emit = defineEmits<{ (e: 'phoneSubmitted', phoneNumber: string): void }>()
 
