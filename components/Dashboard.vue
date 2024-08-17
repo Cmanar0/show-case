@@ -1,21 +1,21 @@
 <template>
-  <div class="min-h-screen flex bg-gray-100 p-8">
+  <div class="min-h-screen flex bg-gray-100 p-8" data-test="dashboard">
     <div class="min-w-full">
       <div>
         <!-- Row of Tailwind buttons to simulate different errors -->
-        <div class="flex justify-between gap-4 mb-4 flex-col md:flex-row">
+        <div class="flex justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
           <h2 class="text-2xl font-bold text-gray-800">Welcome to the Kiosk</h2>
           <span class="flex gap-2">
-            <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400">
+            <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400" data-test="error-404">
               Simulate 404 Not Found
             </button>
-            <button @click="simulateError('error500')" class="bg-yellow-200 text-white px-4 py-2 rounded hover:bg-yellow-400">
+            <button @click="simulateError('error500')" class="bg-yellow-200 text-white px-4 py-2 rounded hover:bg-yellow-400" data-test="error-500">
               Simulate 500 Server Error
             </button>
-            <button @click="simulateError('error403')" class="bg-blue-300 text-white px-4 py-2 rounded hover:bg-blue-400">
+            <button @click="simulateError('error403')" class="bg-blue-300 text-white px-4 py-2 rounded hover:bg-blue-400" data-test="error-403">
               Simulate 403 Forbidden
             </button>
-            <button @click="simulateError('error400')" class="bg-green-300 text-white px-4 py-2 rounded hover:bg-green-400">
+            <button @click="simulateError('error400')" class="bg-green-300 text-white px-4 py-2 rounded hover:bg-green-400" data-test="error-400">
               Simulate 400 Bad Request
             </button>
           </span>
@@ -26,7 +26,7 @@
         <!-- First Card with min-width of 300px -->
         <div class="bg-white rounded-lg shadow-md text-center w-full md:w-1/3 min-w-[300px]">
           <div class="flex justify-center">
-            <PhoneInput @phoneSubmitted="fetchMeetingInfo" />
+            <PhoneInput @phoneSubmitted="fetchMeetingInfo" data-test="phone-input" />
           </div>
         </div>
 
@@ -34,21 +34,20 @@
         <div class="bg-white p-6 rounded-lg shadow-md text-center w-full flex-grow">
           <div class="flex justify-center">
             <h2 v-if="currentStep === 'input'" class="text-2xl font-bold text-gray-800 mb-4">Enter your phone number to find an appointment</h2>
-            <MeetingInfo v-if="currentStep === 'info'" :meeting="meeting" />
-            <ErrorMessage v-if="currentStep === 'error'" />
+            <MeetingInfo v-if="currentStep === 'info' && meeting" :meeting="meeting" data-test="meeting-info" />
+            <ErrorMessage v-if="currentStep === 'error'" data-test="error-message" />
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import PhoneInput from './PhoneInput.vue'
-import MeetingInfo from './MeetingInfo.vue'
-import ErrorMessage from './ErrorMessage.vue'
+import PhoneInput from '../components/PhoneInput.vue'
+import MeetingInfo from '../components/MeetingInfo.vue'
+import ErrorMessage from '../components/ErrorMessage.vue'
 import { addError } from '../stores/errorsStore' // Import addError function
 import { addNotification } from '../stores/notificationStore' // Import addNotification function
 import mittBus from '../utils/mitt.js' // Import mittBus for loader
@@ -56,7 +55,7 @@ import type { Meeting } from '../types/meeting'
 import type { Error } from '../types/errors'
 
 const currentStep = ref<'input' | 'info' | 'error'>('input')
-const meeting = ref<Meeting | null>(null)
+const meeting = ref<Meeting | null>(null);
 const isLoading = ref(false)
 
 const fetchMeetingInfo = async (phoneNumber: string): Promise<void> => {
@@ -66,7 +65,7 @@ const fetchMeetingInfo = async (phoneNumber: string): Promise<void> => {
 
     await new Promise((resolve) => setTimeout(resolve, 500))
 
-    const response = await $fetch<{ meeting: Meeting }>(`/api/meeting?phone=${phoneNumber}`)
+const response = await $fetch<{ meeting: Meeting, status: number, error: string }>(`/api/meeting?phone=${phoneNumber}`);
     if (response && response.meeting) {
       meeting.value = response.meeting
       currentStep.value = 'info'

@@ -12,6 +12,7 @@
             type="text"
             placeholder="123456789"
             class="w-full p-3 text-center border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 tracking-widest"
+            data-test="phone-input"
           />
           
           <!-- Clear Icon -->
@@ -20,6 +21,7 @@
             v-if="phoneNumber"
             @click="clearPhoneNumber"
             class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+            data-test="clear-button"
           >
             <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -27,14 +29,15 @@
           </button>
         </div>
 
-        <span v-if="error" class="text-red-500 text-sm">{{ error }}</span>
+        <span v-if="error" class="text-red-500 text-sm" data-test="error-message">{{ error }}</span>
       </div>
-      <button type="submit" class="w-full p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
+      <button type="submit" class="w-full p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition" data-test="submit-button">
         Submit
       </button>
     </form>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 
