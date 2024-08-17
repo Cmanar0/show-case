@@ -35,14 +35,14 @@
 
       <IconLabelBtn
         type="submit" 
-        label="Submit"
+        label="Search"
         iconName="search"
         iconColor="#ffffff"
-        iconSize="20px"
+        iconSize="22px"
         textSize="16px"
         textColor="#ffffff"
         :bold="true"
-        iconPosition="right"
+        iconPosition="left"
         color="#2563EB" 
         :fullWidth="true"
         position="middle"
