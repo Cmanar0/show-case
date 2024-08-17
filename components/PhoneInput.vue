@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-sm min-w-[300px] p-6">
+      <h2 class="text-2xl text-left mb-10 font-bold text-gray-800">Welcome to the Kiosk</h2>
     <form @submit.prevent="submitPhoneNumber" class="space-y-4">
       <div>
         <label for="phone" class="block text-sm font-medium text-gray-700">Enter Your Phone Number</label>
