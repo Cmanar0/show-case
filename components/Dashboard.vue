@@ -5,7 +5,7 @@
       <!-- Row of Tailwind buttons to simulate different errors -->
       <div class="flex bg-white p-6 rounded-lg shadow-md  justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
         <h2 class="text-2xl flex font-bold text-gray-800">Simulate Responces:</h2>
-        <span class="flex gap-2">
+        <span class="flex gap-2 flex-col md:flex-row">
           <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400" data-test="error-404">
             Simulate 404 Not Found
           </button>
