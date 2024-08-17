@@ -4,8 +4,8 @@
       <div>
         
         <!-- Row of Tailwind buttons to simulate different errors -->
-        <div class="flex justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
-          <h2 class="text-2xl flex  align-center font-bold text-gray-800">Simulate Responces:</h2>
+        <div class="flex bg-white p-6 rounded-lg shadow-md  justify-between gap-4 mb-4 flex-col md:flex-row" data-test="error-buttons">
+          <h2 class="text-2xl flex font-bold text-gray-800">Simulate Responces:</h2>
           <span class="flex gap-2">
             <button @click="simulateError('error404')" class="bg-red-300 text-white px-4 py-2 rounded hover:bg-red-400" data-test="error-404">
               Simulate 404 Not Found
@@ -26,14 +26,16 @@
       <div class="flex flex-col md:flex-row gap-4">
         <!-- First Card with min-width of 300px -->
         <div class="bg-white rounded-lg shadow-md text-center w-full md:w-1/3 min-w-[300px]">
+          <h2 class="text-2xl text-left mb-2 p-6 font-bold text-gray-800">Welcome to the Kiosk</h2>
           <div class="flex justify-center">
-            <PhoneInput @phoneSubmitted="fetchMeetingInfo" data-test="phone-input" />
+              <PhoneInput @phoneSubmitted="fetchMeetingInfo" data-test="phone-input" />
           </div>
         </div>
 
         <!-- Second Card -->
         <div class="bg-white p-6 rounded-lg shadow-md text-center w-full flex-grow">
           <div class="flex justify-center">
+
             <h2 v-if="currentStep === 'input'" class="text-2xl font-bold text-gray-800 mb-4">Enter your phone number to find an appointment</h2>
             <MeetingInfo v-if="currentStep === 'info' && meeting" :meeting="meeting" data-test="meeting-info" />
             <ErrorMessage v-if="currentStep === 'error'" data-test="error-message" />

@@ -1,61 +1,60 @@
 <template>
-  <div class="max-w-sm min-w-[300px] p-6">
-      <h2 class="text-2xl text-left mb-10 font-bold text-gray-800">Welcome to the Kiosk</h2>
-    <form @submit.prevent="submitPhoneNumber" class="space-y-4">
-      <div>
-        <label for="phone" class="block text-sm font-medium text-gray-700">Enter Your Phone Number</label>
-        
-        <!-- Wrapper to position the clear button inside the input -->
-        <div class="relative">
-          <input
-            id="phone"
-            v-model="phoneNumber"
-            type="text"
-            placeholder="123456789"
-            class="w-full p-3 text-center border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 tracking-widest"
-            data-test="phone-input"
-          />
+    <div class="max-w-sm min-w-[300px] p-6">
+      <form @submit.prevent="submitPhoneNumber" class="space-y-4">
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700">Enter Your Phone Number</label>
           
-          <!-- Clear Icon -->
-          <button
-            type="button"
-            v-if="phoneNumber"
-            @click="clearPhoneNumber"
-            class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
-            data-test="clear-button"
-          >
-            <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
+          <!-- Wrapper to position the clear button inside the input -->
+          <div class="relative">
+            <input
+              id="phone"
+              v-model="phoneNumber"
+              type="text"
+              placeholder="123456789"
+              class="w-full p-3 text-center border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 tracking-widest"
+              data-test="phone-input"
+            />
+            
+            <!-- Clear Icon -->
+            <button
+              type="button"
+              v-if="phoneNumber"
+              @click="clearPhoneNumber"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+              data-test="clear-button"
+            >
+              <svg class="w-5 h-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <span v-if="error" class="text-red-500 text-sm" data-test="error-message">{{ error }}</span>
         </div>
 
-        <span v-if="error" class="text-red-500 text-sm" data-test="error-message">{{ error }}</span>
-      </div>
+        <IconLabelBtn
+          type="submit" 
+          label="Search"
+          iconName="search"
+          iconColor="#ffffff"
+          iconSize="22px"
+          textSize="16px"
+          textColor="#ffffff"
+          :bold="true"
+          iconPosition="left"
+          color="#2563EB" 
+          :fullWidth="true"
+          position="middle"
+          :spaceBetween="false"
+          :disabled="false"
+          paddingX="20px"
+          paddingY="10px"
+          borderRadius="4px"  
+          data-test="submit-button"
+        />
 
-      <IconLabelBtn
-        type="submit" 
-        label="Search"
-        iconName="search"
-        iconColor="#ffffff"
-        iconSize="22px"
-        textSize="16px"
-        textColor="#ffffff"
-        :bold="true"
-        iconPosition="left"
-        color="#2563EB" 
-        :fullWidth="true"
-        position="middle"
-        :spaceBetween="false"
-        :disabled="false"
-        paddingX="20px"
-        paddingY="10px"
-        borderRadius="4px"  
-        data-test="submit-button"
-      />
-
-    </form>
-  </div>
+      </form>
+    </div>
 </template>
 
 <script setup lang="ts">
