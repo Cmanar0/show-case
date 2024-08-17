@@ -1,14 +1,15 @@
 import { markRaw } from 'vue';
 
-const iconFiles = import.meta.glob('~/assets/icons/*.svg');
+const iconFiles = import.meta.glob('~/assets/icons/*.svg', { eager: true });
 
 const icons: Record<string, any> = {};
 
-// Transform the iconFiles object into a direct mapping from iconName to import function
+// Transform the iconFiles object into a direct mapping from iconName to the actual SVG component
 Object.entries(iconFiles).forEach(([path, ImportedIcon]) => {
   const iconName = path.split('/').pop()?.replace('.svg', '');
-  if (iconName) {
-    icons[iconName] = markRaw(ImportedIcon);
+  if (iconName && ImportedIcon) {
+    // Use type assertion to ensure TypeScript allows access to `default`
+    icons[iconName] = markRaw((ImportedIcon as any).default || ImportedIcon);
   }
 });
 

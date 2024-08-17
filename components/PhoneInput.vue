@@ -36,6 +36,7 @@
       <IconLabelBtn
         type="submit" 
         label="Submit"
+        iconName="sample-icon"
         iconColor="#ffffff"
         iconSize="12px"
         textSize="16px"

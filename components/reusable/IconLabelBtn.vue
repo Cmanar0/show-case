@@ -27,8 +27,7 @@
 </template>
 
 <script setup>
-import CustomIcon from '../../components/CustomIcon.vue';
-
+import CustomIcon from '../CustomIcon.vue'
 defineProps({
   label: {
     type: String,
@@ -36,7 +35,7 @@ defineProps({
   },
   iconName: {
     type: String,
-    required: true,
+    required: false,
   },
   iconPosition: {
     type: String,

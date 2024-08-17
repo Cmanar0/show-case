@@ -1,39 +1,35 @@
 <template>
-  <component :is="iconComponent" v-if="iconComponent" class="custom-icon" :style="{ width: size, height: size, fill: color }" />
+  <component
+    v-if="iconComponent"
+    :is="iconComponent"
+    class="custom-icon"
+    :style="{ width: size, height: size, fill: color }"
+  />
+  <span v-else class="fallback-message"> </span>
 </template>
 
-<script setup >
+<script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import { useNuxtApp } from '#app'
+// Import getIconComponent directly from your utility file
+import { getIconComponent } from '../utils/icons'
 
-const props = defineProps({
-  iconName: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-    default: 'currentColor',
-  },
-  size: {
-    type: String,
-    default: '16px',
-  },
-})
+// Define the props with explicit types
+const props = defineProps<{
+  iconName: string;
+  color?: string;
+  size?: string;
+}>()
 
-const nuxtApp = useNuxtApp()
 const iconComponent = ref(null)
 
 watchEffect(async () => {
-  const iconImport = await nuxtApp.$getIconComponent(props.iconName);
-  if (iconImport && typeof iconImport === 'function') {
-    iconComponent.value = await iconImport(); // Import the component
-    console.log("GGG", iconComponent.value);  // Debugging: log the imported icon component
+  const iconImport = await getIconComponent(props.iconName);
+  if (iconImport) {
+    iconComponent.value = iconImport;
   } else {
     console.error(`Failed to import icon: ${props.iconName}`);
   }
 });
-
 </script>
 
 <style scoped>

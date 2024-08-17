@@ -210,7 +210,7 @@
 <script setup>
 import { ref } from 'vue';
 import IconLabelBtn from '../components/reusable/IconLabelBtn.vue';
-import { addNotification } from '../stores/notificationStore' // Import addNotification function
+import { addNotification } from '../stores/notificationStore'
 
 const handleClick = () => {
   addNotification({
