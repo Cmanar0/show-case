@@ -27,8 +27,8 @@
               class="w-full p-4 text-sm border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
             />
             <span class="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" @click="toggleShowPassword">
-              <img class="icon-eye w-5 h-5" v-if="showPassword" src="../assets/svg/eye.svg" alt="Show Password" data-testid="show-password-icon" id="show-password-icon" />
-              <img class="icon-eye w-5 h-5" v-else src="../assets/svg/crossed_eye.svg" alt="Hide Password" data-testid="hide-password-icon" id="hide-password-icon" />
+              <img class="icon-eye w-5 h-5" v-if="showPassword" src="../assets/icons/eye.svg" alt="Show Password" data-testid="show-password-icon" id="show-password-icon" />
+              <img class="icon-eye w-5 h-5" v-else src="../assets/icons/crossed_eye.svg" alt="Hide Password" data-testid="hide-password-icon" id="hide-password-icon" />
             </span>
           </div>
         </div>

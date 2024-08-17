@@ -9,6 +9,7 @@
       <header class="bg-gray-800 text-white p-5">
         <span>
           <hamburger class="ham hover:text-gray-300" @click="toggleMenu" />
+          <!-- <img class="logo" src="../assets/icons/hamburger.svg" alt="logo" /> -->
         </span>
 
         <!-- User Dropdown Menu start -->
@@ -23,7 +24,7 @@
                   'transition-transform duration-300': true
                 }"
                 class="icon"
-                src="../assets/svg/down.svg"
+                src="../assets/icons/down.svg"
                 alt="dropdown"
               />
             </div>
@@ -56,7 +57,7 @@
       >
         <nav>
           <a v-if="(mennuOpen && isMobile) || !isMobile" href="/dashboard" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
-            <img class="icon" src="../assets/svg/projects.svg" alt="projects" />
+            <img class="icon" src="../assets/icons/projects.svg" alt="projects" />
             <span
               v-if="(mennuOpen && isMobile) || !isMobile"
               class="menu-item"
@@ -69,7 +70,7 @@
             </span>
           </a>
           <a v-if="(mennuOpen && isMobile) || !isMobile" href="/users" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
-            <img class="icon" src="../assets/svg/users.svg" alt="users" />
+            <img class="icon" src="../assets/icons/users.svg" alt="users" />
             <span
               v-if="(mennuOpen && isMobile) || !isMobile"
               class="menu-item"
@@ -106,7 +107,7 @@
 </template>
 
 <script setup>
-import hamburger from '../assets/svg/hamburger.vue'
+import hamburger from '../assets/icons/hamburger.vue'
 import ModalOneBtn from '../components/reusable/ModalOneBtn.vue'
 import GlobalSpinner from '../components/reusable/GlobalSpinner.vue'
 import Cookies from 'js-cookie'
