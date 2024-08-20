@@ -1,17 +1,17 @@
 <template>
-    <div class="max-w-sm min-w-[300px] p-6">
-      <form @submit.prevent="submitPhoneNumber" class="space-y-4">
-        <div>
+    <div class=" p-6 pb-10">
+      <form @submit.prevent="submitPhoneNumber" class="space-y-4 input-width">
+        <div class="flex flex-col align-center">
           <label for="phone" class="block text-sm font-medium text-gray-700">Enter Your Phone Number</label>
           
           <!-- Wrapper to position the clear button inside the input -->
-          <div class="relative">
+          <div class="input-width relative">
             <input
               id="phone"
               v-model="phoneNumber"
               type="text"
               placeholder="123456789"
-              class="w-full p-3 text-center border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 tracking-widest"
+              class=" w-full p-3 text-center border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 tracking-widest"
               data-test="phone-input"
             />
             
@@ -82,5 +82,19 @@ const submitPhoneNumber = (): void => {
 
 const clearPhoneNumber = (): void => {
   phoneNumber.value = ''
+  emit('phoneCleared') 
 }
+
+// Watch for changes to the phoneNumber
+watch(phoneNumber, (newValue) => {
+  if (newValue === '') {
+    emit('phoneCleared') 
+  }
+})
 </script>
+
+<style>
+.input-width {
+  width: 250px !important;
+}
+</style>
