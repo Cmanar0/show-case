@@ -18,7 +18,7 @@
         </div>
 
         <!-- Second Card -->
-        <div class="bg-white p-6 rounded-lg shadow-md text-center w-full flex-grow w-full md:w-1/3 min-w-[300px]">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center w-full flex-grow md:w-1/3 min-w-[300px]">
           <div class="flex justify-center">
 
             <h2 v-if="currentStep === 'input'" class="text-2xl font-bold text-gray-800 mb-4">Enter your phone number to find an appointment</h2>
@@ -32,7 +32,7 @@
           <p class="text-lg font-bold text-green-800">Thank you for scheduling the appointment! Someone will come pick you up soon.</p>
           <button 
             @click="closeSuccessMessage" 
-            class="absolute top-2 right-2 p-1 bg-white rounded-full text-gray-500 hover:text-gray-800 focus:outline-none" 
+            class="absolute top-2 right-2 p-1 bg-transparent rounded-full text-gray-500 hover:text-gray-800 focus:outline-none" 
             data-test="close-success-button"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
