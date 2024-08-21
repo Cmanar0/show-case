@@ -35,7 +35,7 @@
         <div class="mobile-scale flex items-center gap-6 md:gap-8 mb-8" :class="{ 'flex-col': isMobile }">
           <!-- Zpět button desktop -->
           <button v-if="!isMobile" @click="goBack" class="back-btn rounded-full bg-transparent bolt text-white w-32 h-16 flex items-center justify-center">
-            <img src="../public/back.svg" alt="Back" class="w-6 h-6 mr-2" /> Zpět
+            <img :src="'/back.svg'" alt="Back" class="w-6 h-6 mr-2" /> Zpět
           </button>
 
           <div class="flex items-center gap-3 phone">
@@ -55,7 +55,7 @@
               </div>
               <!-- Clear Button mobile -->
               <button v-if="isMobile" @click="clearPhoneNumber" class="bg-white custom-clear txt-blue-custom w-16 h-16 rounded-lg text-xl shadow-md flex items-center justify-center ml-2">
-                <img src="../public/cross.svg" alt="Clear" class="button-icon">
+                <img :src="'/cross.svg'" alt="Clear" class="button-icon">
               </button>
             </div>
             <div class="flex flex-row gap-3">
@@ -78,17 +78,17 @@
 
             <!-- Clear Button desktop -->
             <button v-if="!isMobile" @click="clearPhoneNumber" class="bg-white custom-clear txt-blue-custom w-16 h-16 rounded-lg text-xl shadow-md flex items-center justify-center ml-2">
-              <img src="../public/cross.svg" alt="Clear" class="button-icon">
+              <img :src="'/cross.svg'" alt="Clear" class="button-icon">
             </button>
           </div>
           <div class="flex flex-row gap-10">
             <!-- Zpět button mobile -->
             <button v-if="isMobile" @click="goBack" class="back-btn rounded-full bg-transparent bolt text-white w-32 h-16 flex items-center justify-center">
-              <img src="../public/back.svg" alt="Back" class="w-6 h-6 mr-2" /> Zpět
+              <img :src="'/back.svg'" alt="Back" class="w-6 h-6 mr-2" /> Zpět
             </button>
             <!-- Vyhledat button -->
             <button @click="searchMeeting" class="bg-white bolt search-btn txt-blue-custom w-36 h-16 rounded-full flex items-center justify-center">
-              <img src="../public/search.svg" alt="Back" class="w-6 h-6 mr-2" /> Vyhledat
+              <img :src="'/search.svg'" alt="Back" class="w-6 h-6 mr-2" /> Vyhledat
             </button>
           </div>
         </div>
@@ -107,7 +107,7 @@
 
           <!-- Delete Button (Backspace) -->
           <button @click="deleteDigit" class="bg-blue-100 txt-blue-custom w-16 h-16 rounded-lg text-xl shadow-md flex items-center justify-center">
-            <img src="../public/delete.svg" alt="icon" class="button-icon">
+            <img :src="'/delete.svg'" alt="icon" class="button-icon">
           </button>
         </div>
       </div>
